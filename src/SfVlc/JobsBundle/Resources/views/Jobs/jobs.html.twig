@@ -1,0 +1,32 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Listado de Ofertas de trabajo.{% endblock %}
+
+{% block body %}
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Fecha</th>
+                <th>Empresa</th>
+                <th>Tags</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for job in jobs %}
+                <tr>
+                    <th>
+                        <a href="#">{{ job.title }}</a>
+                    </th>
+                    <th>{{ job.dateCreated.format('d/m/Y') }}</th>
+                    <th>{{ job.company }}</th>
+                    <th>
+                        {% for tag in job.tags %}
+                            <a href="#">{{ tag.tag }}</a>{% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                    </th>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

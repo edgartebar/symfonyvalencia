@@ -1,7 +1,6 @@
-parameters:
-#    sf_vlc_jobs.example.class: SfVlc\JobsBundle\Example
+parameters: ~
 
 services:
-#    sf_vlc_jobs.example:
-#        class: %sf_vlc_jobs.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    sfvlc.jobs_manager:
+        class: SfVlc\JobsBundle\Service\JobsManager
+        arguments: [@doctrine.orm.entity_manager]

@@ -1,3 +1,8 @@
-sf_vlc_jobs_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: SfVlcJobsBundle:Default:index }
+sf_vlc_jobs_list:
+    pattern:  /
+    defaults: { _controller: SfVlcJobsBundle:Jobs:jobs }
+
+sf_vlc_jobs_list_by_tag:
+    pattern:  /{tag}/
+    defaults: { _controller: SfVlcJobsBundle:Jobs:jobs }
+

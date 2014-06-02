@@ -20,7 +20,7 @@ class MainController extends Controller
         $posts = $post_manager->findBy(array(), array('createdAt' => 'DESC'));
         return array(
             'posts' => $posts
-            );
+        );
     }
 
     /**

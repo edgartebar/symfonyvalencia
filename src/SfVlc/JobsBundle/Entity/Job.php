@@ -4,7 +4,8 @@ namespace SfVlc\JobsBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
+use SfVlc\JobsBundle\Entity\JobTag as Tag;
 /**
  * Job
  *
@@ -33,6 +34,14 @@ class Job
     /**
      * @var string
      *
+     * @ORM\Column(name="Url", type="string", length=255)
+     * @Assert\NotBlank(message="Este valor no debe estar vacío")
+     */
+    private $url;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="Link", type="string", length=255)
      */
     private $link;
@@ -47,9 +56,9 @@ class Job
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="Date", type="datetime")
+     * @ORM\Column(name="Date_Created", type="datetime")
      */
-    private $date;
+    private $dateCreated;
 
     /**
      * @var string
@@ -59,10 +68,21 @@ class Job
     private $company;
 
     /**
-     * @ORM\ManyToOne(targetEntity="JobsCategory", inversedBy="girls", fetch="LAZY")
-     * @ORM\JoinColumn(name="Category_ID", referencedColumnName="ID", onDelete="CASCADE")
+     * @ORM\ManyToMany(targetEntity="JobTag", cascade={"persist"}, inversedBy="jobs", fetch="LAZY")
+     *
+     * @ORM\JoinTable(name="jobs_tags",
+     *   joinColumns={@ORM\JoinColumn(name="Job_ID", referencedColumnName="id", onDelete="CASCADE")},
+     *   inverseJoinColumns={@ORM\JoinColumn(name="Tag_ID", referencedColumnName="id", onDelete="CASCADE")}
+     * )
+     *
+     * @var ArrayCollection
      */
-    protected $category;
+    protected $tags;
+
+    public function __construct()
+    {
+        $this->tags = new ArrayCollection;
+    }
 
     /**
      * Get id
@@ -149,9 +169,9 @@ class Job
      * @param \DateTime $date
      * @return Job
      */
-    public function setDate($date)
+    public function setDateCreated($date)
     {
-        $this->date = $date;
+        $this->dateCreated = $date;
 
         return $this;
     }
@@ -161,9 +181,9 @@ class Job
      *
      * @return \DateTime 
      */
-    public function getDate()
+    public function getDateCreated()
     {
-        return $this->date;
+        return $this->dateCreated;
     }
 
     /**
@@ -190,18 +210,58 @@ class Job
     }
 
     /**
-     * @param mixed $category
+     * @param Tag $tag
      */
-    public function setCategory($category)
+    public function addTag(Tag $tag)
     {
-        $this->category = $category;
+        if(!$this->tags->contains($tag))
+        {
+            $tag->addJob($this);
+            $this->tags[] = $tag;
+        }
+    }
+
+    public function removeTag(Tag $tag)
+    {
+        if($this->tags->contains($tag))
+        {
+            $this->tags->removeElement($tag);
+            $tag->removeJob($this);
+        }
+    }
+
+    public function hasTag($tag)
+    {
+        $checkJobTag = function($tagString){
+            return function($key, Tag $tag) use ($tagString){
+                return $tag->getTag() == $tagString;
+            };
+        };
+
+        $this->tags->exists($checkJobTag($tag));
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
-    public function getCategory()
+    public function getTags()
     {
-        return $this->category;
+        return $this->tags;
+    }
+
+    /**
+     * @param string $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
     }
 }
