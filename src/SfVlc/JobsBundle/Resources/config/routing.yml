@@ -1,0 +1,3 @@
+sf_vlc_jobs_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: SfVlcJobsBundle:Default:index }

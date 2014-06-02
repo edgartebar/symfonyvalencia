@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new SfVlc\MainBundle\SfVlcMainBundle(),
             new BladeTester\LightNewsBundle\BladeTesterLightNewsBundle(),
             new SfVlc\NewsBundle\SfVlcNewsBundle(),
+            new SfVlc\JobsBundle\SfVlcJobsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test', 'travis'))) {

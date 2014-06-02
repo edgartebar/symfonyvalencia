@@ -1,3 +1,7 @@
+sf_vlc_jobs:
+    resource: "@SfVlcJobsBundle/Resources/config/routing.yml"
+    prefix:   /
+
 blade_tester_light_news_bundle:
     resource: "@BladeTesterLightNewsBundle/Resources/config/routing.yml"
     prefix:   /news        #choose the prefix you want
