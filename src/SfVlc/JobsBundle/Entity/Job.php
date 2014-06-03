@@ -9,7 +9,7 @@ use SfVlc\JobsBundle\Entity\JobTag as Tag;
 /**
  * Job
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="SfVlc\JobsBundle\Repository\JobRepository")
  * @ORM\Table(name="jobs")
   */
 class Job

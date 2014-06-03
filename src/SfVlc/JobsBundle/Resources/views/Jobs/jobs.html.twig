@@ -22,7 +22,7 @@
                     <th>{{ job.company }}</th>
                     <th>
                         {% for tag in job.tags %}
-                            <a href="#">{{ tag.tag }}</a>{% if not loop.last %}, {% endif %}
+                            <a href="{{ path('sf_vlc_jobs_list_by_tag', {tag: tag.url}) }}">{{ tag.tag }}</a>{% if not loop.last %}, {% endif %}
                         {% endfor %}
                     </th>
                 </tr>

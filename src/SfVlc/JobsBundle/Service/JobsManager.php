@@ -16,7 +16,7 @@ class JobsManager
     }
 
     public function getAllJobs($tagUrl = null){
-        $jobs = $tagUrl ? $this->entity_repository->findJobByTag($tagUrl) : $this->entity_repository->findAll();
+        $jobs = $tagUrl ? $this->entity_repository->findJobsByTag($tagUrl) : $this->entity_repository->findAll();
 
         return $jobs;
     }

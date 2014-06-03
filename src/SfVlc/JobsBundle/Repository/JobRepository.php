@@ -11,7 +11,7 @@ class JobRepository extends EntityRepository
             ->addSelect('tags')
             ->join('job.tags', 'tags')
             ->addGroupBy('job')
-            ->orderBy('jobs.dateCreated', 'DESC');
+            ->orderBy('job.dateCreated', 'DESC');
 
         return $query;
     }
@@ -28,18 +28,21 @@ class JobRepository extends EntityRepository
 
     public function findOneByUrl($url){
         $query = $this->getCommonQueryBuilder()
-            ->where('job.url = :url')
-            ->setParameter(':url', $url);
+            ->where('job.url = :url');
 
-        return $this->createQuery($query)->getSingleResult();
+        return $this->createQuery($query)
+            ->setParameter(':url', $url)
+            ->getSingleResult();
     }
 
-    public function findJobByTag($tagUrl){
-        $query = $this->getCommonQueryBuilder()
-            ->where('tags.url = :url')
-            ->setParameter(':url', $tagUrl);
+    public function findJobsByTag($tagUrl){
 
-        return $this->createQuery($query)->getResult();
+        $query = $this->getCommonQueryBuilder()
+            ->where('tags.url = :url');
+
+        return $this->createQuery($query)
+            ->setParameter(':url', $tagUrl)
+            ->getResult();
     }
 }
  
