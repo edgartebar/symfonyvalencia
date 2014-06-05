@@ -16,8 +16,19 @@ class JobsController extends Controller
         $jobs = $this->get('sfvlc.jobsmanager')->getAllJobs($tag);
 
         return array(
-            'jobs' => $jobs
+            'jobs' => $jobs,
+            'tag' => $tag
         );
+    }
+
+     /**
+     * @Template()
+     */
+    public function jobAction($url)
+    {
+        $job = $this->get('sfvlc.jobsmanager')->getJobByUrl($url);
+
+        return array('job' => $job);
     }
 }
  

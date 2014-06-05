@@ -23,6 +23,9 @@
                                         <a id="contact-link" href="{{ path('sf_vlc_main_contact') }}">Contacto</a>
                                     </li>
                                     <li><a href="#">Próximos eventos</a></li>
+                                    <li class="{% if app.request.attributes.get('_route') == 'sf_vlc_jobs_list' %}active{% endif %}">
+                                        <a id="contact-link" href="{{ path('sf_vlc_jobs_list') }}">Ofertas de trabajo</a>
+                                    </li>
                                 </ul>
                             {% endblock %}
                             <p class="navbar-text pull-right">

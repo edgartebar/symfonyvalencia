@@ -1,9 +1,11 @@
 {% extends '::base.html.twig' %}
 
-{% block title %}Listado de Ofertas de trabajo.{% endblock %}
+{% block title %}
+    Listado de Ofertas de trabajo. {% if tag %}[{{ tag }}]{% endif %}
+{% endblock %}
 
 {% block body %}
-    <table>
+    <table class="table table-bordered table-condensed table-hover">
         <thead>
             <tr>
                 <th>Nombre</th>
@@ -16,7 +18,7 @@
             {% for job in jobs %}
                 <tr>
                     <th>
-                        <a href="#">{{ job.title }}</a>
+                        <a href="{{ path('sf_vlc_job', {url: job.url}) }}">{{ job.title }}</a>
                     </th>
                     <th>{{ job.dateCreated.format('d/m/Y') }}</th>
                     <th>{{ job.company }}</th>

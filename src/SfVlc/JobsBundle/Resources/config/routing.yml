@@ -1,3 +1,7 @@
+sf_vlc_job:
+    pattern:  /job/{url}/
+    defaults: { _controller: SfVlcJobsBundle:Jobs:job }
+
 sf_vlc_jobs_list:
     pattern:  /
     defaults: { _controller: SfVlcJobsBundle:Jobs:jobs }
@@ -5,4 +9,3 @@ sf_vlc_jobs_list:
 sf_vlc_jobs_list_by_tag:
     pattern:  /{tag}/
     defaults: { _controller: SfVlcJobsBundle:Jobs:jobs }
-

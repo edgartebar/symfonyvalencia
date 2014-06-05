@@ -20,5 +20,12 @@ class JobsManager
 
         return $jobs;
     }
+
+    public function getJobByUrl($url)
+    {
+        $job = $this->entity_repository->findOneByUrl($url);
+
+        return $job;
+    }
 }
  
