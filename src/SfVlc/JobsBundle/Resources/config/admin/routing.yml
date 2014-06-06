@@ -1,0 +1,30 @@
+admin_job:
+    pattern:  /
+    defaults: { _controller: "SfVlcJobsBundle:Job:index" }
+
+admin_job_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SfVlcJobsBundle:Job:show" }
+
+admin_job_new:
+    pattern:  /new
+    defaults: { _controller: "SfVlcJobsBundle:Job:new" }
+
+admin_job_create:
+    pattern:  /create
+    defaults: { _controller: "SfVlcJobsBundle:Job:create" }
+    requirements: { _method: post }
+
+admin_job_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SfVlcJobsBundle:Job:edit" }
+
+admin_job_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SfVlcJobsBundle:Job:update" }
+    requirements: { _method: post|put }
+
+admin_job_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SfVlcJobsBundle:Job:delete" }
+    requirements: { _method: post|delete }
